@@ -1,0 +1,93 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 80ms, border-color 80ms;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.root:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Variants */
+.solid {
+  background-color: #111;
+  color: #fff;
+}
+
+.solid:hover:not(:disabled) {
+  background-color: #333;
+}
+
+.outline {
+  background-color: #fff;
+  color: #111;
+  border-color: #111;
+}
+
+.outline:hover:not(:disabled) {
+  background-color: #111;
+  color: #fff;
+}
+
+.ghost {
+  background-color: transparent;
+  color: #111;
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: #111;
+  color: #fff;
+}
+
+/* Sizes */
+.sm {
+  height: 26px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+.md {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.lg {
+  height: 40px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+/* Loading */
+.loading .content {
+  opacity: 0.5;
+}
+
+.spinner {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.content {
+  display: contents;
+}

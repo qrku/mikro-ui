@@ -1,0 +1,93 @@
+/* ── Root ─────────────────────────────────────────────────────────────── */
+.root {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid #111;
+  background: transparent;
+  color: #111;
+  overflow: hidden;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+
+  /* color transitions slightly behind fill so it feels intentional */
+  transition:
+    color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 80ms;
+}
+
+/* ── Animated fill via ::before ───────────────────────────────────────── */
+.root::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #111;
+  border-radius: inherit;
+  /* start collapsed at center */
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.pressed::before {
+  /* 100% covers the full bounding box regardless of aspect ratio */
+  clip-path: circle(100% at 50% 50%);
+}
+
+/* ── States ───────────────────────────────────────────────────────────── */
+.pressed {
+  color: #fff;
+  border-color: #111;
+}
+
+.root:hover:not(:disabled):not(.pressed) {
+  background-color: #f5f5f5;
+}
+
+.root:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.root:focus-visible {
+  outline: 2px solid var(--color-primary, #0070f3);
+  outline-offset: 2px;
+}
+
+/* ── Content sits above the ::before fill ─────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Sizes — square-ish by default, expands with content ─────────────── */
+.sm {
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  font-size: 12px;
+}
+
+.md {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+}
+
+.lg {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 14px;
+}

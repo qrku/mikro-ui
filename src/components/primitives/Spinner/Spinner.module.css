@@ -1,0 +1,76 @@
+.root {
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  /* ── Liquid metallic ring ─────────────────────────────────────────── */
+  /* Chrome gradient: dark tail → rising silver → bright peak → fading tail */
+  background: conic-gradient(
+    from 200deg at 50% 50%,
+    rgba(30, 30, 30, 0)      0deg,
+    rgba(70, 70, 70, 0.45)  18deg,
+    #525252                  38deg,
+    #8c8c8c                  72deg,
+    #cccccc                 108deg,
+    #efefef                 132deg,
+    #ffffff                 155deg,
+    #ececec                 172deg,
+    #b4b4b4                 198deg,
+    #6a6a6a                 228deg,
+    #3a3a3a                 254deg,
+    rgba(30, 30, 30, 0.25)  282deg,
+    rgba(30, 30, 30, 0)     312deg
+  );
+
+  /* Punch a transparent hole in the middle to make it a ring */
+  --ring: 3px;
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - var(--ring)),
+    #000        calc(100% - var(--ring))
+  );
+  mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - var(--ring)),
+    #000        calc(100% - var(--ring))
+  );
+
+  /* Soft metallic glow */
+  filter: drop-shadow(0 0 4px rgba(180, 180, 180, 0.35));
+
+  animation: liquidSpin 1.6s linear infinite;
+}
+
+/* ── Keyframes ────────────────────────────────────────────────────────── */
+/* Rotation steps at 0/25/50/75/100%; blob morph offset at 12/37/62/87%  */
+/* so the deformation always lags slightly behind the spin — liquid inertia */
+@keyframes liquidSpin {
+  0%   { transform: rotate(0deg);   border-radius: 50%; }
+  12%  {                             border-radius: 46% 54% 42% 58% / 58% 42% 58% 42%; }
+  25%  { transform: rotate(90deg);  border-radius: 50%; }
+  37%  {                             border-radius: 54% 46% 58% 42% / 42% 58% 42% 58%; }
+  50%  { transform: rotate(180deg); border-radius: 50%; }
+  62%  {                             border-radius: 46% 54% 42% 58% / 58% 42% 58% 42%; }
+  75%  { transform: rotate(270deg); border-radius: 50%; }
+  87%  {                             border-radius: 54% 46% 58% 42% / 42% 58% 42% 58%; }
+  100% { transform: rotate(360deg); border-radius: 50%; }
+}
+
+/* ── Sizes ────────────────────────────────────────────────────────────── */
+.sm {
+  width: 16px;
+  height: 16px;
+  --ring: 2px;
+}
+
+.md {
+  width: 24px;
+  height: 24px;
+  --ring: 3px;
+}
+
+.lg {
+  width: 36px;
+  height: 36px;
+  --ring: 4px;
+}
