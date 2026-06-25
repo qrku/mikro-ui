@@ -1,0 +1,8 @@
+:root {
+  --dot-sm: 10px;
+  --dot-md: 12px;
+  --dot-lg: 14px;
+  --color-primary: #0070f3;
+  --color-primary-hover: #0060d3;
+  --color-primary-subtle: #e8f0fe;
+}
