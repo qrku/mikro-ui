@@ -1,0 +1,58 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: calc(100vh - 100px);
+}
+
+.shapes {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.diamond {
+  display: block;
+  width: 36px;
+  height: 36px;
+  background: #111;
+  transform: rotate(45deg);
+}
+
+.square {
+  display: block;
+  width: 36px;
+  height: 36px;
+  border: 2px solid #111;
+  background: transparent;
+}
+
+.label {
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 0.04em;
+}
+
+.link {
+  font-size: 12px;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 120ms;
+}
+
+.link:hover {
+  opacity: 0.5;
+}
+
+.link::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #111;
+  transform: rotate(45deg);
+}

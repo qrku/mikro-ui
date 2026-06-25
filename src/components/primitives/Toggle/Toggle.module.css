@@ -1,93 +1,90 @@
-/* ── Root ─────────────────────────────────────────────────────────────── */
+/* ── Root (label) ─────────────────────────────────────────────────────── */
 .root {
-  position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 3px;
-  font-family: inherit;
-  font-weight: 400;
-  line-height: 1;
+  gap: 8px;
   cursor: pointer;
-  border: 1px solid #111;
-  background: transparent;
-  color: #111;
-  overflow: hidden;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  white-space: nowrap;
-
-  /* color transitions slightly behind fill so it feels intentional */
-  transition:
-    color 200ms cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 80ms;
 }
 
-/* ── Animated fill via ::before ───────────────────────────────────────── */
-.root::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: #111;
-  border-radius: inherit;
-  /* start collapsed at center */
-  clip-path: circle(0% at 50% 50%);
-  transition: clip-path 320ms cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-
-.pressed::before {
-  /* 100% covers the full bounding box regardless of aspect ratio */
-  clip-path: circle(100% at 50% 50%);
-}
-
-/* ── States ───────────────────────────────────────────────────────────── */
-.pressed {
-  color: #fff;
-  border-color: #111;
-}
-
-.root:hover:not(:disabled):not(.pressed) {
-  background-color: #f5f5f5;
-}
-
-.root:disabled {
+.root:has(.input:disabled) {
   opacity: 0.35;
   cursor: not-allowed;
 }
 
-.root:focus-visible {
-  outline: 2px solid var(--color-primary, #0070f3);
-  outline-offset: 2px;
+/* ── Hidden native input ──────────────────────────────────────────────── */
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
 }
 
-/* ── Content sits above the ::before fill ─────────────────────────────── */
-.content {
+/* ── Track (container + rail line) ───────────────────────────────────── */
+.track {
   position: relative;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+  flex-shrink: 0;
+  --thumb-off: 2px;
+  --thumb-on: calc(var(--track-w) - var(--dot-size));
 }
 
-/* ── Sizes — square-ish by default, expands with content ─────────────── */
+/* horizontal rail */
+.track::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: #111;
+  transform: translateY(-50%);
+}
+
+.input:focus-visible ~ .track {
+  outline: 2px solid var(--color-primary, #0070f3);
+  outline-offset: 3px;
+}
+
+/* ── Thumb ────────────────────────────────────────────────────────────── */
+.thumb {
+  position: absolute;
+  top: 50%;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border: 1px solid #111;
+  background: #fff;
+  transform: translateY(-50%) translateX(var(--thumb-off)) rotate(45deg);
+  transition:
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 180ms;
+}
+
+.input:checked ~ .track .thumb {
+  background: #111;
+  transform: translateY(-50%) translateX(var(--thumb-on)) rotate(45deg);
+}
+
+/* ── Label text ───────────────────────────────────────────────────────── */
+.label {
+  line-height: 1;
+  color: #111;
+}
+
+/* ── Sizes ────────────────────────────────────────────────────────────── */
 .sm {
-  min-width: 26px;
-  height: 26px;
-  padding: 0 6px;
   font-size: 12px;
 }
-
 .md {
-  min-width: 32px;
-  height: 32px;
-  padding: 0 8px;
   font-size: 13px;
 }
-
 .lg {
-  min-width: 40px;
-  height: 40px;
-  padding: 0 10px;
   font-size: 14px;
 }
+
+/* --dot-size and --track-w set here; --thumb-on derived via calc on .track */
+.trackSm { width: 28px; height: 14px; --track-w: 28px; --dot-size: var(--dot-sm); }
+.trackMd { width: 30px; height: 16px; --track-w: 30px; --dot-size: var(--dot-md); }
+.trackLg { width: 32px; height: 20px; --track-w: 32px; --dot-size: var(--dot-lg); }

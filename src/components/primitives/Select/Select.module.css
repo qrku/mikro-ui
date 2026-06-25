@@ -1,7 +1,18 @@
 /* ── Wrapper ──────────────────────────────────────────────────────────── */
 .wrapper {
   position: relative;
-  display: inline-block;
+  display: block;
+  width: 100%;
+}
+
+/* ── Label ────────────────────────────────────────────────────────────── */
+.labelText {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 11px;
+  color: #999;
+  line-height: 1;
+  cursor: default;
 }
 
 /* ── Trigger ──────────────────────────────────────────────────────────── */
@@ -9,10 +20,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
   width: 100%;
-  background-color: #fff;
-  border: 1px solid #111;
+  background: #e8e8e8;
+  border: none;
   border-radius: 3px;
   font-family: inherit;
   font-weight: 400;
@@ -21,16 +31,12 @@
   cursor: pointer;
   text-align: left;
   white-space: nowrap;
+  outline: none;
   -webkit-tap-highlight-color: transparent;
-  transition: background-color 80ms;
-}
-
-.trigger:hover:not(:disabled) {
-  background-color: #f5f5f5;
 }
 
 .trigger:disabled {
-  opacity: 0.35;
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
@@ -44,7 +50,7 @@
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #999;
+  color: #b0b0b0;
 }
 
 .value {
@@ -52,17 +58,34 @@
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.arrow {
-  flex-shrink: 0;
   color: #111;
-  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.arrowOpen {
-  transform: rotate(180deg);
+/* ── Trigger indicator ────────────────────────────────────────────────── */
+.indicator {
+  flex-shrink: 0;
+  background: #111;
+  transform: rotate(45deg);
+  transition:
+    transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 140ms;
 }
+
+/* open → solid square */
+.indicatorOpen {
+  transform: rotate(0deg);
+}
+
+/* closed + no value → outline diamond */
+.indicatorOutline {
+  background: transparent;
+  border: 1.5px solid #999;
+}
+
+/* sizes */
+.indicatorSm { width: var(--dot-sm); height: var(--dot-sm); }
+.indicatorMd { width: var(--dot-md); height: var(--dot-md); }
+.indicatorLg { width: var(--dot-lg); height: var(--dot-lg); }
 
 /* ── Dropdown panel ───────────────────────────────────────────────────── */
 .dropdown {
@@ -72,14 +95,12 @@
   right: 0;
   z-index: 1000;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  border-radius: 4px;
   box-shadow:
-    0 4px 16px rgba(0, 0, 0, 0.08),
-    0 1px 4px rgba(0, 0, 0, 0.05);
+    0 4px 20px rgba(0, 0, 0, 0.10),
+    0 1px 4px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 
-  /* Closed state */
   opacity: 0;
   transform: translateY(-4px) scaleY(0.97);
   transform-origin: top center;
@@ -105,48 +126,34 @@
 /* ── Option list ──────────────────────────────────────────────────────── */
 .list {
   list-style: none;
-  padding: 4px;
+  padding: 4px 0;
   margin: 0;
-  max-height: 220px;
+  max-height: 240px;
   overflow-y: auto;
   outline: none;
   scrollbar-width: thin;
   scrollbar-color: #ddd transparent;
 }
 
-.list::-webkit-scrollbar {
-  width: 4px;
-}
-
-.list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.list::-webkit-scrollbar-thumb {
-  background: #ddd;
-  border-radius: 4px;
-}
+.list::-webkit-scrollbar { width: 4px; }
+.list::-webkit-scrollbar-track { background: transparent; }
+.list::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
 
 /* ── Option item ──────────────────────────────────────────────────────── */
 .option {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  border-radius: 3px;
+  border-radius: 2px;
   cursor: pointer;
   user-select: none;
   color: #111;
   white-space: nowrap;
-  transition: background-color 60ms;
+  transition: background-color 80ms;
 }
 
 .optionActive {
-  background-color: #f5f5f5;
-}
-
-.optionSelected {
-  font-weight: 500;
+  background: #f0f0f0;
 }
 
 .optionDisabled {
@@ -155,59 +162,28 @@
   pointer-events: none;
 }
 
-.check {
+/* ── Option indicator (diamond → square on hover) ────────────────────── */
+.optionIndicator {
   flex-shrink: 0;
-  color: #111;
+  background: #111;
+  transform: rotate(45deg);
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ── Sizes (applied directly on elements) ─────────────────────────────── */
-.triggerSm {
-  height: 26px;
-  padding: 0 8px;
-  font-size: 12px;
+.optionIndicatorActive {
+  transform: rotate(0deg);
 }
 
-.triggerMd {
-  height: 32px;
-  padding: 0 10px 0 12px;
-  font-size: 13px;
-}
+/* sizes */
+.optionSm { height: 28px; padding: 0 10px; font-size: 12px; }
+.optionMd { height: 36px; padding: 0 12px; font-size: 13px; }
+.optionLg { height: 44px; padding: 0 16px; font-size: 14px; }
 
-.triggerLg {
-  height: 40px;
-  padding: 0 14px 0 18px;
-  font-size: 14px;
-}
+.optionIndicatorSm { width: var(--dot-sm); height: var(--dot-sm); }
+.optionIndicatorMd { width: var(--dot-md); height: var(--dot-md); }
+.optionIndicatorLg { width: var(--dot-lg); height: var(--dot-lg); }
 
-.optionSm {
-  height: 26px;
-  padding: 0 8px;
-  font-size: 12px;
-}
-
-.optionMd {
-  height: 30px;
-  padding: 0 10px;
-  font-size: 13px;
-}
-
-.optionLg {
-  height: 36px;
-  padding: 0 14px;
-  font-size: 14px;
-}
-
-.checkSm {
-  width: 10px;
-  height: 8px;
-}
-
-.checkMd {
-  width: 12px;
-  height: 9px;
-}
-
-.checkLg {
-  width: 13px;
-  height: 10px;
-}
+/* ── Trigger sizes ────────────────────────────────────────────────────── */
+.triggerSm { height: 28px; padding: 0 10px; font-size: 12px; gap: 6px; }
+.triggerMd { height: 36px; padding: 0 12px; font-size: 13px; gap: 8px; }
+.triggerLg { height: 44px; padding: 0 16px; font-size: 14px; gap: 10px; }

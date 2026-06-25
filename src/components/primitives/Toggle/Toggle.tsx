@@ -1,70 +1,87 @@
-'use client';
+"use client";
 
-import { forwardRef, useState, type ButtonHTMLAttributes, type MouseEvent } from 'react';
-import styles from './Toggle.module.css';
+import {
+  forwardRef,
+  useRef,
+  type InputHTMLAttributes,
+  type MutableRefObject,
+  type ReactNode,
+} from "react";
+import styles from "./Toggle.module.css";
 
-export type ToggleSize = 'sm' | 'md' | 'lg';
+export type ToggleSize = "sm" | "md" | "lg";
 
-export interface ToggleProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'> {
-  pressed?: boolean;
-  defaultPressed?: boolean;
-  onChange?: (pressed: boolean) => void;
+export interface ToggleProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "size" | "type" | "onChange"
+> {
   size?: ToggleSize;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  onChange?: (checked: boolean) => void;
+  children?: ReactNode;
 }
 
-const sizeClass = {
+const rootSizeClass = {
   sm: styles.sm,
   md: styles.md,
   lg: styles.lg,
 } as Record<ToggleSize, string>;
 
-const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(
+const trackSizeClass = {
+  sm: styles.trackSm,
+  md: styles.trackMd,
+  lg: styles.trackLg,
+} as Record<ToggleSize, string>;
+
+const Toggle = forwardRef<HTMLInputElement, ToggleProps>(
   (
     {
-      pressed: controlledPressed,
-      defaultPressed = false,
+      size = "md",
+      checked,
+      defaultChecked,
       onChange,
-      size = 'md',
-      className,
       children,
-      onClick,
       disabled,
+      className,
+      id,
       ...props
     },
     ref,
   ) => {
-    const isControlled = controlledPressed !== undefined;
-    const [internal, setInternal] = useState(defaultPressed);
-    const pressed = isControlled ? controlledPressed! : internal;
-
-    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-      if (!isControlled) setInternal((p) => !p);
-      onChange?.(!pressed);
-      onClick?.(e);
+    const innerRef = useRef<HTMLInputElement>(null);
+    const setRef = (node: HTMLInputElement | null) => {
+      (innerRef as MutableRefObject<HTMLInputElement | null>).current = node;
+      if (typeof ref === "function") ref(node);
+      else if (ref) ref.current = node;
     };
 
     return (
-      <button
-        ref={ref}
-        type="button"
-        aria-pressed={pressed}
-        disabled={disabled}
-        className={[
-          styles.root,
-          sizeClass[size],
-          pressed ? styles.pressed : '',
-          className ?? '',
-        ]
+      <label
+        className={[styles.root, rootSizeClass[size], className ?? ""]
           .filter(Boolean)
-          .join(' ')}
-        onClick={handleClick}
-        {...props}
+          .join(" ")}
       >
-        <span className={styles.content}>{children}</span>
-      </button>
+        <input
+          ref={setRef}
+          type="checkbox"
+          role="switch"
+          className={styles.input}
+          checked={checked}
+          defaultChecked={defaultChecked}
+          disabled={disabled}
+          onChange={(e) => onChange?.(e.target.checked)}
+          id={id}
+          {...props}
+        />
+        <span className={[styles.track, trackSizeClass[size]].join(" ")}>
+          <span className={styles.thumb} />
+        </span>
+        {children && <span className={styles.label}>{children}</span>}
+      </label>
     );
   },
 );
 
-Toggle.displayName = 'Toggle';
+Toggle.displayName = "Toggle";
 export { Toggle };

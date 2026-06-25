@@ -1,0 +1,74 @@
+/* ── Root (label) ─────────────────────────────────────────────────────── */
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.root:has(.input:disabled) {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Hidden native input ──────────────────────────────────────────────── */
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* ── Visual box ───────────────────────────────────────────────────────── */
+.box {
+  position: relative;
+  flex-shrink: 0;
+  border: 1.5px solid #111;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+/* fill — scales in from center on check */
+.box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #111;
+  transform: scale(0);
+  transition: transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* checked — full fill */
+.input:checked ~ .box::before {
+  transform: scale(1);
+}
+
+/* indeterminate — thin horizontal bar */
+.input:indeterminate ~ .box::before {
+  transform: scaleX(1) scaleY(0.3);
+}
+
+/* focus ring */
+.input:focus-visible ~ .box {
+  outline: 2px solid var(--color-primary, #0070f3);
+  outline-offset: 2px;
+}
+
+/* ── Label text ───────────────────────────────────────────────────────── */
+.label {
+  line-height: 1;
+  color: #111;
+}
+
+/* ── Sizes ────────────────────────────────────────────────────────────── */
+.sm { font-size: 12px; }
+.md { font-size: 13px; }
+.lg { font-size: 14px; }
+
+.boxSm { width: var(--dot-sm); height: var(--dot-sm); }
+.boxMd { width: var(--dot-md); height: var(--dot-md); }
+.boxLg { width: var(--dot-lg); height: var(--dot-lg); }

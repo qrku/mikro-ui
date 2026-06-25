@@ -1,0 +1,103 @@
+/* ── Wrapper ────────────────────────────────────────────────────────────── */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.wrapperDisabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ── Label ──────────────────────────────────────────────────────────────── */
+.label {
+  font-size: 11px;
+  color: #999;
+  line-height: 1;
+}
+
+/* ── Input base ─────────────────────────────────────────────────────────── */
+.input {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: var(--dot-size);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+/* ── Webkit track ───────────────────────────────────────────────────────── */
+.input::-webkit-slider-runnable-track {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    #111 var(--pct, 0%),
+    #ccc var(--pct, 0%)
+  );
+}
+
+/* ── Webkit thumb — diamond ─────────────────────────────────────────────── */
+.input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background: #fff;
+  border: 1px solid #111;
+  transform: rotate(45deg);
+  margin-top: calc((1px - var(--dot-size)) / 2);
+  transition: background-color 120ms;
+}
+
+.input:hover::-webkit-slider-thumb {
+  background: #111;
+}
+
+.input:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid var(--color-primary, #0070f3);
+  outline-offset: 3px;
+}
+
+/* ── Firefox track ──────────────────────────────────────────────────────── */
+.input::-moz-range-track {
+  height: 1px;
+  background: #ccc;
+  border: none;
+}
+
+.input::-moz-range-progress {
+  height: 1px;
+  background: #111;
+}
+
+/* ── Firefox thumb — diamond ────────────────────────────────────────────── */
+.input::-moz-range-thumb {
+  box-sizing: border-box;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background: #fff;
+  border: 1px solid #111;
+  border-radius: 0;
+  transform: rotate(45deg);
+  transition: background-color 120ms;
+}
+
+.input:hover::-moz-range-thumb {
+  background: #111;
+}
+
+.input:focus-visible::-moz-range-thumb {
+  outline: 2px solid var(--color-primary, #0070f3);
+  outline-offset: 3px;
+}
+
+/* ── Sizes ──────────────────────────────────────────────────────────────── */
+.sm { font-size: 12px; --dot-size: var(--dot-sm); }
+.md { font-size: 13px; --dot-size: var(--dot-md); }
+.lg { font-size: 14px; --dot-size: var(--dot-lg); }

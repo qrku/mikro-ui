@@ -1,0 +1,95 @@
+.form {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────── */
+.formHeader {
+  padding-bottom: 24px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 4px;
+  line-height: 1;
+}
+
+.description {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+  line-height: 1;
+}
+
+/* ── Divider ──────────────────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: #e8e8e8;
+  margin: 0;
+}
+
+/* ── Section ──────────────────────────────────────────────────────────── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 0;
+}
+
+/* ── Two-column row ───────────────────────────────────────────────────── */
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ── Field group (label + content) ───────────────────────────────────── */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldLabel {
+  font-size: 11px;
+  color: #999;
+  line-height: 1;
+}
+
+/* ── Radio list ───────────────────────────────────────────────────────── */
+.radioList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Toggle row ───────────────────────────────────────────────────────── */
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.toggleLabel {
+  font-size: 13px;
+  color: #111;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.toggleDesc {
+  font-size: 11px;
+  color: #999;
+  line-height: 1;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────────── */
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 24px;
+}

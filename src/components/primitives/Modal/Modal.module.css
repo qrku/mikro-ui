@@ -1,0 +1,83 @@
+/* ── Backdrop ──────────────────────────────────────────────────────────── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 160ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Panel ─────────────────────────────────────────────────────────────── */
+.panel {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  border-radius: 3px;
+  outline: none;
+  animation: slideIn 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.panelSm { max-width: 380px; }
+.panelMd { max-width: 480px; }
+.panelLg { max-width: 640px; }
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 0;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111;
+  line-height: 1;
+}
+
+/* ── Close button — filled diamond that outlines on hover ─────────────── */
+.close {
+  flex-shrink: 0;
+  width: var(--dot-lg);
+  height: var(--dot-lg);
+  padding: 0;
+  border: none;
+  background: #111;
+  cursor: pointer;
+  transform: rotate(45deg);
+  transition: background-color 140ms, border 140ms;
+  outline: none;
+}
+
+.close:hover {
+  background: transparent;
+  border: 1.5px solid #111;
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--color-primary, #0070f3);
+  outline-offset: 2px;
+}
+
+/* ── Body ──────────────────────────────────────────────────────────────── */
+.body {
+  padding: 16px 20px 20px;
+  color: #111;
+  font-size: 13px;
+  line-height: 1.6;
+}

@@ -2,28 +2,7 @@
   min-height: 100vh;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 28px 48px 80px;
-}
-
-/* ── Header ───────────────────────────────────────────────────────────── */
-.header {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 48px;
-}
-
-.logo {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  color: #111;
-}
-
-.tagline {
-  font-size: 11px;
-  color: #111;
-  opacity: 0.3;
+  padding: 0 48px 80px;
 }
 
 /* ── Grid ─────────────────────────────────────────────────────────────── */

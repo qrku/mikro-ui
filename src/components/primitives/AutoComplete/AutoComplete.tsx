@@ -27,10 +27,11 @@ export interface AutoCompleteProps {
   onChange?: (value: string) => void;
   onSelect?: (value: string) => void;
   placeholder?: string;
+  label?: string;
+  error?: string;
   size?: InputSize;
   disabled?: boolean;
   invalid?: boolean;
-  /** Pass false to disable client-side filtering (e.g. for server-driven search) */
   filterOptions?: boolean;
   noResultsText?: string;
   name?: string;
@@ -55,6 +56,18 @@ function HighlightMatch({ text, query }: { text: string; query: string }) {
   );
 }
 
+const optionIndicatorSizeClass = {
+  sm: styles.optionIndicatorSm,
+  md: styles.optionIndicatorMd,
+  lg: styles.optionIndicatorLg,
+} as Record<InputSize, string>;
+
+const optionSizeClass = {
+  sm: styles.optionSm,
+  md: styles.optionMd,
+  lg: styles.optionLg,
+} as Record<InputSize, string>;
+
 const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
   (
     {
@@ -64,6 +77,8 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
       onChange,
       onSelect,
       placeholder,
+      label,
+      error,
       size = 'md',
       disabled = false,
       invalid = false,
@@ -114,7 +129,6 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
       [isControlled, onChange, onSelect, close],
     );
 
-    // Close on outside interaction
     useEffect(() => {
       if (!open) return;
       const handler = (e: MouseEvent) => {
@@ -124,7 +138,6 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
       return () => document.removeEventListener('mousedown', handler);
     }, [open, close]);
 
-    // Scroll active option into view
     useEffect(() => {
       if (!open || activeIndex < 0 || !listRef.current) return;
       const item = listRef.current.children[activeIndex] as HTMLElement | undefined;
@@ -182,9 +195,6 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
     const activeId = open && activeIndex >= 0 ? `${uid}-opt-${activeIndex}` : undefined;
     const isOpen = open && (filtered.length > 0 || showNoResults);
 
-    const optionSizeSuffix = size.charAt(0).toUpperCase() + size.slice(1);
-    const optionSizeClass = styles[`option${optionSizeSuffix}` as keyof typeof styles] as string | undefined;
-
     return (
       <div
         ref={wrapperRef}
@@ -208,6 +218,8 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
           onKeyDown={handleKeyDown}
           onFocus={() => setOpen(true)}
           placeholder={placeholder}
+          {...(label !== undefined ? { label } : {})}
+          {...(error !== undefined ? { error } : {})}
           size={size}
           disabled={disabled}
           invalid={invalid}
@@ -229,12 +241,12 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
             className={styles.list}
           >
             {showNoResults ? (
-              <li className={[styles.noResults, optionSizeClass].filter(Boolean).join(' ')}>
+              <li className={[styles.noResults, optionSizeClass[size]].join(' ')}>
                 {noResultsText}
               </li>
             ) : (
               filtered.map((opt, i) => {
-                const label = opt.label ?? opt.value;
+                const optLabel = opt.label ?? opt.value;
                 return (
                   <li
                     key={opt.value}
@@ -244,7 +256,7 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
                     aria-disabled={opt.disabled}
                     className={[
                       styles.option,
-                      optionSizeClass,
+                      optionSizeClass[size],
                       i === activeIndex ? styles.optionActive : '',
                       opt.disabled ? styles.optionDisabled : '',
                     ]
@@ -257,7 +269,17 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
                       select(opt);
                     }}
                   >
-                    <HighlightMatch text={label} query={inputValue} />
+                    <HighlightMatch text={optLabel} query={inputValue} />
+                    <span
+                      className={[
+                        styles.optionIndicator,
+                        optionIndicatorSizeClass[size],
+                        i === activeIndex ? styles.optionIndicatorActive : '',
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
+                      aria-hidden="true"
+                    />
                   </li>
                 );
               })

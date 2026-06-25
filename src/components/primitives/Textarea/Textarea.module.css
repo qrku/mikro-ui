@@ -1,55 +1,65 @@
-.root {
+/* ── Wrapper ───────────────────────────────────────────────────────────── */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.wrapperDisabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ── Label row ─────────────────────────────────────────────────────────── */
+.labelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.labelText {
+  font-size: 11px;
+  color: #999;
+  line-height: 1;
+  cursor: default;
+}
+
+.errorText {
+  font-size: 11px;
+  color: #e5484d;
+  font-style: italic;
+  line-height: 1;
+}
+
+/* ── Textarea wrap ─────────────────────────────────────────────────────── */
+.textareaWrap {
+  position: relative;
+  background: #e8e8e8;
+  border-radius: 3px;
+}
+
+.invalid .textareaWrap {
+  background: rgba(229, 72, 77, 0.12);
+}
+
+/* ── Textarea ──────────────────────────────────────────────────────────── */
+.textarea {
   display: block;
   width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  background: #fff;
+  background: transparent;
+  border: none;
+  outline: none;
   color: #111;
   font-family: inherit;
   font-weight: 400;
   line-height: 1.5;
-  outline: none;
   resize: vertical;
-  transition:
-    border-color 140ms ease,
-    box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.root::placeholder {
-  color: #bbb;
-}
-
-.root:hover:not(:disabled):not(:focus) {
-  border-color: #bbb;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.root:focus {
-  border-color: #111;
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.10),
-    0 2px 6px rgba(0, 0, 0, 0.06);
-}
-
-.root:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-  background: #fafafa;
-  resize: none;
-}
-
-.invalid {
-  border-color: #e5484d;
-}
-
-.invalid:focus {
-  border-color: #e5484d;
-  box-shadow:
-    0 6px 20px rgba(229, 72, 77, 0.12),
-    0 2px 6px rgba(229, 72, 77, 0.07);
+.textarea::placeholder {
+  color: #b0b0b0;
 }
 
 .noResize {
@@ -57,21 +67,45 @@
   overflow: hidden;
 }
 
-/* Sizes */
-.sm {
-  min-height: 64px;
-  padding: 6px 8px;
-  font-size: 12px;
+/* ── Sizes ─────────────────────────────────────────────────────────────── */
+.textareaSm { min-height: 72px;  padding: 8px 10px;  font-size: 12px; }
+.textareaMd { min-height: 88px;  padding: 10px 12px; font-size: 13px; }
+.textareaLg { min-height: 108px; padding: 12px 16px; font-size: 14px; }
+
+/* ── Corner square (replaces native resize handle) ─────────────────────── */
+.corner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 1.5px solid #aaa;
+  background: transparent;
+  pointer-events: none;
+  transition: background-color 140ms, border-color 140ms;
 }
 
-.md {
-  min-height: 80px;
-  padding: 8px 12px;
-  font-size: 13px;
+.cornerSm { width: var(--dot-sm); height: var(--dot-sm); }
+.cornerMd { width: var(--dot-md); height: var(--dot-md); }
+.cornerLg { width: var(--dot-lg); height: var(--dot-lg); }
+
+/* has value → solid black */
+.cornerFilled {
+  background: #111;
+  border-color: transparent;
 }
 
-.lg {
-  min-height: 100px;
-  padding: 10px 18px;
-  font-size: 14px;
+/* disabled → solid gray */
+.cornerDisabled {
+  background: #aaa;
+  border-color: transparent;
+}
+
+/* error, empty → outline red */
+.cornerError {
+  border-color: #e5484d;
+}
+
+/* error, has value → solid red */
+.cornerErrorFilled {
+  background: #e5484d;
+  border-color: transparent;
 }

@@ -26,12 +26,37 @@ export interface SelectProps {
   defaultValue?: string;
   onChange?: (value: string) => void;
   placeholder?: string;
+  label?: string;
   disabled?: boolean;
   name?: string;
   id?: string;
   size?: SelectSize;
   className?: string;
 }
+
+const triggerSizeClass = {
+  sm: styles.triggerSm,
+  md: styles.triggerMd,
+  lg: styles.triggerLg,
+} as Record<SelectSize, string>;
+
+const optionSizeClass = {
+  sm: styles.optionSm,
+  md: styles.optionMd,
+  lg: styles.optionLg,
+} as Record<SelectSize, string>;
+
+const indicatorSizeClass = {
+  sm: styles.indicatorSm,
+  md: styles.indicatorMd,
+  lg: styles.indicatorLg,
+} as Record<SelectSize, string>;
+
+const optionIndicatorSizeClass = {
+  sm: styles.optionIndicatorSm,
+  md: styles.optionIndicatorMd,
+  lg: styles.optionIndicatorLg,
+} as Record<SelectSize, string>;
 
 const Select = forwardRef<HTMLButtonElement, SelectProps>(
   (
@@ -40,7 +65,8 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
       value: controlledValue,
       defaultValue,
       onChange,
-      placeholder = 'Select…',
+      placeholder = 'Select',
+      label,
       disabled = false,
       name,
       id,
@@ -137,16 +163,10 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
           break;
         }
         case 'Home':
-          if (open) {
-            e.preventDefault();
-            setActiveIndex(enabledIndices[0] ?? 0);
-          }
+          if (open) { e.preventDefault(); setActiveIndex(enabledIndices[0] ?? 0); }
           break;
         case 'End':
-          if (open) {
-            e.preventDefault();
-            setActiveIndex(enabledIndices[enabledIndices.length - 1] ?? activeIndex);
-          }
+          if (open) { e.preventDefault(); setActiveIndex(enabledIndices[enabledIndices.length - 1] ?? activeIndex); }
           break;
         case 'Escape':
         case 'Tab':
@@ -156,18 +176,30 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
     };
 
     const listboxId = `${uid}-listbox`;
+    const triggerId = id ?? `${uid}-trigger`;
     const activeId = activeIndex >= 0 ? `${uid}-opt-${activeIndex}` : undefined;
 
-    const sizeSuffix = size.charAt(0).toUpperCase() + size.slice(1); // 'Sm' | 'Md' | 'Lg'
-    const triggerSizeClass = styles[`trigger${sizeSuffix}` as keyof typeof styles];
-    const optionSizeClass = styles[`option${sizeSuffix}` as keyof typeof styles];
-    const checkSizeClass = styles[`check${sizeSuffix}` as keyof typeof styles];
+    // Trigger indicator: outline diamond (closed+empty) / solid diamond (closed+value) / outline square (open+empty) / solid square (open+value)
+    const indicatorClass = [
+      styles.indicator,
+      indicatorSizeClass[size],
+      open ? styles.indicatorOpen : '',
+      !selectedOption ? styles.indicatorOutline : '',
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <div
         ref={wrapperRef}
         className={[styles.wrapper, className ?? ''].filter(Boolean).join(' ')}
       >
+        {label && (
+          <label htmlFor={triggerId} className={styles.labelText}>
+            {label}
+          </label>
+        )}
+
         {name && <input type="hidden" name={name} value={value} />}
 
         <button
@@ -183,8 +215,8 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
           aria-controls={listboxId}
           aria-activedescendant={activeId}
           disabled={disabled}
-          id={id}
-          className={[styles.trigger, triggerSizeClass].join(' ')}
+          id={triggerId}
+          className={[styles.trigger, triggerSizeClass[size]].join(' ')}
           onClick={() => {
             if (open) {
               close();
@@ -198,25 +230,14 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
           <span className={selectedOption ? styles.value : styles.placeholder}>
             {selectedOption ? selectedOption.label : placeholder}
           </span>
-          <svg
-            className={[styles.arrow, open ? styles.arrowOpen : ''].filter(Boolean).join(' ')}
-            width="10"
-            height="6"
-            viewBox="0 0 10 6"
-            aria-hidden="true"
-          >
-            <polyline
-              points="0,0 5,6 10,0"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <span className={indicatorClass} aria-hidden="true" />
         </button>
 
-        <div className={[styles.dropdown, open ? styles.dropdownOpen : ''].filter(Boolean).join(' ')}>
+        <div
+          className={[styles.dropdown, open ? styles.dropdownOpen : '']
+            .filter(Boolean)
+            .join(' ')}
+        >
           <ul
             ref={listRef}
             id={listboxId}
@@ -233,8 +254,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                 aria-disabled={opt.disabled}
                 className={[
                   styles.option,
-                  optionSizeClass,
-                  opt.value === value ? styles.optionSelected : '',
+                  optionSizeClass[size],
                   i === activeIndex ? styles.optionActive : '',
                   opt.disabled ? styles.optionDisabled : '',
                 ]
@@ -248,18 +268,16 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
                 }}
               >
                 <span>{opt.label}</span>
-                {opt.value === value && (
-                  <svg className={[styles.check, checkSizeClass].join(' ')} viewBox="0 0 12 9" aria-hidden="true">
-                    <polyline
-                      points="1,4.5 4.5,8 11,1"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                )}
+                <span
+                  className={[
+                    styles.optionIndicator,
+                    optionIndicatorSizeClass[size],
+                    i === activeIndex ? styles.optionIndicatorActive : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  aria-hidden="true"
+                />
               </li>
             ))}
           </ul>

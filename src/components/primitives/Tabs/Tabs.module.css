@@ -1,0 +1,84 @@
+/* ── Root ────────────────────────────────────────────────────────────────── */
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Tab list ────────────────────────────────────────────────────────────── */
+.list {
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+/* ── Tab button ──────────────────────────────────────────────────────────── */
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px 12px;
+  background: transparent;
+  border: none;
+  color: #999;
+  font-family: inherit;
+  font-weight: 400;
+  cursor: pointer;
+  line-height: 1;
+  outline: none;
+  white-space: nowrap;
+  transition: color 120ms;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab:first-child {
+  padding-left: 0;
+}
+
+.tab:hover:not(:disabled) {
+  color: #555;
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-primary, #0070f3);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Outline square on every tab */
+.tab::before {
+  content: '';
+  display: inline-block;
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border: 1.5px solid #bbb;
+  transition: background-color 120ms, border-color 120ms;
+}
+
+/* Active state — filled square */
+.tabActive {
+  color: #111;
+}
+
+.tabActive::before {
+  background: #111;
+  border-color: transparent;
+}
+
+.tabDisabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Sizes ───────────────────────────────────────────────────────────────── */
+.sm { font-size: 12px; }
+.md { font-size: 13px; }
+.lg { font-size: 14px; }
+
+/* ── Panel ───────────────────────────────────────────────────────────────── */
+.panel {
+  padding-top: 20px;
+  color: #111;
+  font-size: 13px;
+  line-height: 1.6;
+}

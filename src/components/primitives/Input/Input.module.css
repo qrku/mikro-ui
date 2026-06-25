@@ -1,70 +1,104 @@
-.root {
-  display: block;
+/* ── Wrapper ───────────────────────────────────────────────────────────── */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   width: 100%;
-  border: 1px solid #ddd;
+}
+
+.wrapperDisabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* ── Label row ─────────────────────────────────────────────────────────── */
+.labelRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.labelText {
+  font-size: 11px;
+  color: #999;
+  line-height: 1;
+  cursor: default;
+}
+
+.errorText {
+  font-size: 11px;
+  color: #e5484d;
+  font-style: italic;
+  line-height: 1;
+}
+
+/* ── Input wrap ────────────────────────────────────────────────────────── */
+.inputWrap {
+  display: flex;
+  align-items: center;
+  background: #e8e8e8;
   border-radius: 3px;
-  background: #fff;
+}
+
+.invalid .inputWrap {
+  background: rgba(229, 72, 77, 0.12);
+}
+
+/* ── Input ─────────────────────────────────────────────────────────────── */
+.input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
   color: #111;
   font-family: inherit;
   font-weight: 400;
   line-height: 1;
-  outline: none;
-  transition:
-    border-color 140ms ease,
-    box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.root::placeholder {
-  color: #bbb;
+.input::placeholder {
+  color: #b0b0b0;
 }
 
-.root:hover:not(:disabled):not(:focus) {
-  border-color: #bbb;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+/* sizes */
+.inputSm { height: 28px; padding: 0 10px; font-size: 12px; }
+.inputMd { height: 36px; padding: 0 12px; font-size: 13px; }
+.inputLg { height: 44px; padding: 0 16px; font-size: 14px; }
+
+/* ── Indicator square ──────────────────────────────────────────────────── */
+.indicator {
+  flex-shrink: 0;
+  margin-right: 12px;
+  border: 1.5px solid #aaa;
+  background: transparent;
+  transition: background-color 140ms, border-color 140ms;
 }
 
-.root:focus {
-  border-color: #111;
-  transform: translateY(-2px);
-  box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.10),
-    0 2px 6px rgba(0, 0, 0, 0.06);
+.indicatorSm { width: var(--dot-sm); height: var(--dot-sm); }
+.indicatorMd { width: var(--dot-md); height: var(--dot-md); }
+.indicatorLg { width: var(--dot-lg); height: var(--dot-lg); }
+
+/* has value → solid black */
+.indicatorFilled {
+  background: #111;
+  border-color: transparent;
 }
 
-.root:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-  background: #fafafa;
+/* disabled → solid gray */
+.indicatorDisabled {
+  background: #aaa;
+  border-color: transparent;
 }
 
-.invalid {
+/* error, empty → outline red */
+.indicatorError {
   border-color: #e5484d;
 }
 
-.invalid:focus {
-  border-color: #e5484d;
-  box-shadow:
-    0 6px 20px rgba(229, 72, 77, 0.12),
-    0 2px 6px rgba(229, 72, 77, 0.07);
-}
-
-/* Sizes */
-.sm {
-  height: 26px;
-  padding: 0 8px;
-  font-size: 12px;
-}
-
-.md {
-  height: 32px;
-  padding: 0 12px;
-  font-size: 13px;
-}
-
-.lg {
-  height: 40px;
-  padding: 0 18px;
-  font-size: 14px;
+/* error, has value → solid red */
+.indicatorErrorFilled {
+  background: #e5484d;
+  border-color: transparent;
 }
