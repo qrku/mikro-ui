@@ -23,12 +23,12 @@
   pointer-events: none;
 }
 
-/* ── Visual dot (diamond shape) ───────────────────────────────────────── */
+/* ── Visual dot ───────────────────────────────────────────────────────── */
 .dot {
   position: relative;
   flex-shrink: 0;
   border: 1.5px solid #111;
-  transform: rotate(45deg);
+  border-radius: var(--square-radius);
 }
 
 /* fill — scales in from center on check */

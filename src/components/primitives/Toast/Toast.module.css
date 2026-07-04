@@ -20,7 +20,7 @@
   min-height: 44px;
   padding: 12px 12px 12px 14px;
   background: #111;
-  border-radius: 3px;
+  border-radius: var(--radius-md);
   pointer-events: auto;
   box-sizing: border-box;
 }
@@ -49,21 +49,22 @@
   flex-shrink: 0;
   width: 9px;
   height: 9px;
+  border-radius: var(--square-radius);
   transition: background-color 140ms;
 }
 
-/* default — white outline diamond */
+/* default — white outline square */
 .indicatorDefault {
   border: 1.5px solid rgba(255, 255, 255, 0.5);
   background: transparent;
 }
 
-/* success — white filled diamond */
+/* success — white filled square */
 .indicatorSuccess {
   background: #fff;
 }
 
-/* error — red filled diamond */
+/* error — red filled square */
 .indicatorError {
   background: #e5484d;
 }
@@ -78,7 +79,7 @@
   word-break: break-word;
 }
 
-/* ── Close button — diamond ───────────────────────────────────────────── */
+/* ── Close button — square ─────────────────────────────────────────────── */
 .close {
   flex-shrink: 0;
   width: 10px;
@@ -88,7 +89,7 @@
   background: rgba(255, 255, 255, 0.35);
   cursor: pointer;
   outline: none;
-  transform: rotate(45deg);
+  border-radius: var(--square-radius);
   transition: background-color 140ms;
 }
 

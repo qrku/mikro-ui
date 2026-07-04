@@ -23,7 +23,7 @@
   width: 100%;
   background: #e8e8e8;
   border: none;
-  border-radius: 3px;
+  border-radius: var(--radius-md);
   font-family: inherit;
   font-weight: 400;
   color: #111;
@@ -65,18 +65,11 @@
 .indicator {
   flex-shrink: 0;
   background: #111;
-  transform: rotate(45deg);
-  transition:
-    transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    background-color 140ms;
+  border-radius: var(--square-radius);
+  transition: background-color 140ms;
 }
 
-/* open → solid square */
-.indicatorOpen {
-  transform: rotate(0deg);
-}
-
-/* closed + no value → outline diamond */
+/* no value → outline square */
 .indicatorOutline {
   background: transparent;
   border: 1.5px solid #999;
@@ -95,7 +88,7 @@
   right: 0;
   z-index: 1000;
   background: #fff;
-  border-radius: 4px;
+  border-radius: var(--radius-lg);
   box-shadow:
     0 4px 20px rgba(0, 0, 0, 0.10),
     0 1px 4px rgba(0, 0, 0, 0.06);
@@ -137,14 +130,14 @@
 
 .list::-webkit-scrollbar { width: 4px; }
 .list::-webkit-scrollbar-track { background: transparent; }
-.list::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+.list::-webkit-scrollbar-thumb { background: #ddd; border-radius: var(--radius-lg); }
 
 /* ── Option item ──────────────────────────────────────────────────────── */
 .option {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 2px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
   user-select: none;
   color: #111;
@@ -162,16 +155,11 @@
   pointer-events: none;
 }
 
-/* ── Option indicator (diamond → square on hover) ────────────────────── */
+/* ── Option indicator ─────────────────────────────────────────────────── */
 .optionIndicator {
   flex-shrink: 0;
   background: #111;
-  transform: rotate(45deg);
-  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.optionIndicatorActive {
-  transform: rotate(0deg);
+  border-radius: var(--square-radius);
 }
 
 /* sizes */

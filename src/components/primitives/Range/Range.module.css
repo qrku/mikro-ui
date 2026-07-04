@@ -42,7 +42,7 @@
   );
 }
 
-/* ── Webkit thumb — diamond ─────────────────────────────────────────────── */
+/* ── Webkit thumb — square ─────────────────────────────────────────────── */
 .input::-webkit-slider-thumb {
   -webkit-appearance: none;
   box-sizing: border-box;
@@ -50,7 +50,7 @@
   height: var(--dot-size);
   background: #fff;
   border: 1px solid #111;
-  transform: rotate(45deg);
+  border-radius: var(--square-radius);
   margin-top: calc((1px - var(--dot-size)) / 2);
   transition: background-color 120ms;
 }
@@ -76,15 +76,14 @@
   background: #111;
 }
 
-/* ── Firefox thumb — diamond ────────────────────────────────────────────── */
+/* ── Firefox thumb — square ─────────────────────────────────────────────── */
 .input::-moz-range-thumb {
   box-sizing: border-box;
   width: var(--dot-size);
   height: var(--dot-size);
   background: #fff;
   border: 1px solid #111;
-  border-radius: 0;
-  transform: rotate(45deg);
+  border-radius: var(--square-radius);
   transition: background-color 120ms;
 }
 

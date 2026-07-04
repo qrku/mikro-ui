@@ -51,11 +51,11 @@ describe('Input', () => {
     expect(input.value).toBe('a@b.com');
   });
 
-  it('indicator reflects value state via onChange', () => {
-    render(<Input placeholder="x" />);
+  it('calls onChange when typing', () => {
+    const onChange = vi.fn();
+    render(<Input placeholder="x" onChange={onChange} />);
     const input = screen.getByRole('textbox');
     fireEvent.change(input, { target: { value: 'hello' } });
-    // no crash — state update is the core assertion
-    expect(input).toBeInTheDocument();
+    expect(onChange).toHaveBeenCalled();
   });
 });

@@ -29,7 +29,7 @@
   flex-shrink: 0;
   border: 1.5px solid #111;
   background: #fff;
-  transform: rotate(45deg);
+  border-radius: var(--square-radius);
 }
 
 /* fill — scales in from center on check */

@@ -6,9 +6,7 @@ export default defineConfig([
     format: ['esm', 'cjs'],
     dts: true,
     external: ['react', 'react-dom', 'react/jsx-runtime', 'next'],
-    esbuildOptions(options) {
-      options.loader = { ...options.loader, '.css': 'local-css' };
-    },
+    loader: { '.css': 'local-css' },
     tsconfig: 'tsconfig.lib.json',
     clean: true,
     treeshake: true,

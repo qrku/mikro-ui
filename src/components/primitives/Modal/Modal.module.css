@@ -21,7 +21,7 @@
   position: relative;
   width: 100%;
   background: #fff;
-  border-radius: 3px;
+  border-radius: var(--radius-md);
   outline: none;
   animation: slideIn 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -50,7 +50,7 @@
   line-height: 1;
 }
 
-/* ── Close button — filled diamond that outlines on hover ─────────────── */
+/* ── Close button — filled square that outlines on hover ──────────────── */
 .close {
   flex-shrink: 0;
   width: var(--dot-lg);
@@ -59,7 +59,7 @@
   border: none;
   background: #111;
   cursor: pointer;
-  transform: rotate(45deg);
+  border-radius: var(--square-radius);
   transition: background-color 140ms, border 140ms;
   outline: none;
 }

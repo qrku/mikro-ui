@@ -179,11 +179,10 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
     const triggerId = id ?? `${uid}-trigger`;
     const activeId = activeIndex >= 0 ? `${uid}-opt-${activeIndex}` : undefined;
 
-    // Trigger indicator: outline diamond (closed+empty) / solid diamond (closed+value) / outline square (open+empty) / solid square (open+value)
+    // Trigger indicator: outline square (no value) / solid square (value)
     const indicatorClass = [
       styles.indicator,
       indicatorSizeClass[size],
-      open ? styles.indicatorOpen : '',
       !selectedOption ? styles.indicatorOutline : '',
     ]
       .filter(Boolean)
@@ -269,11 +268,7 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(
               >
                 <span>{opt.label}</span>
                 <span
-                  className={[
-                    styles.optionIndicator,
-                    optionIndicatorSizeClass[size],
-                    i === activeIndex ? styles.optionIndicatorActive : '',
-                  ]
+                  className={[styles.optionIndicator, optionIndicatorSizeClass[size]]
                     .filter(Boolean)
                     .join(' ')}
                   aria-hidden="true"

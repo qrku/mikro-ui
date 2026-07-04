@@ -13,12 +13,12 @@
   gap: 16px;
 }
 
-.diamond {
+.squareFilled {
   display: block;
   width: 36px;
   height: 36px;
   background: #111;
-  transform: rotate(45deg);
+  border-radius: var(--square-radius);
 }
 
 .square {
@@ -27,6 +27,7 @@
   height: 36px;
   border: 2px solid #111;
   background: transparent;
+  border-radius: var(--square-radius);
 }
 
 .label {
@@ -54,5 +55,5 @@
   width: 6px;
   height: 6px;
   background: #111;
-  transform: rotate(45deg);
+  border-radius: var(--square-radius);
 }

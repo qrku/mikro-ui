@@ -46,6 +46,7 @@
   width: 6px;
   height: 6px;
   background: #111;
+  border-radius: var(--square-radius);
   flex-shrink: 0;
 }
 

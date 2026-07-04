@@ -5,10 +5,21 @@
   --color-primary-hover: #0060d3;
   --color-primary-subtle: #e8f0fe;
 
-  /* dot/diamond size scale — applies to all squares and diamonds across components */
+  /* dot size scale — applies to all squares across components */
   --dot-sm: 10px;
   --dot-md: 12px;
   --dot-lg: 14px;
+
+  /* corner rounding for all square shapes (dots, thumbs, indicators) — change here to restyle every square at once */
+  --square-radius: 3px;
+
+  /* corner radius scale — single source for every rounded container in the project.
+     sm = tight inline accents (option rows, focus rings)
+     md = primary control surfaces (buttons, inputs, panels)
+     lg = popovers/dropdowns and their scrollbars */
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
 }
 
 

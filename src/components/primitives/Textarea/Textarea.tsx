@@ -4,7 +4,6 @@ import {
   forwardRef,
   useRef,
   useEffect,
-  useState,
   useId,
   type TextareaHTMLAttributes,
   type ChangeEvent,
@@ -25,12 +24,6 @@ const textareaSizeClass = {
   sm: styles.textareaSm,
   md: styles.textareaMd,
   lg: styles.textareaLg,
-} as Record<TextareaSize, string>;
-
-const cornerSizeClass = {
-  sm: styles.cornerSm,
-  md: styles.cornerMd,
-  lg: styles.cornerLg,
 } as Record<TextareaSize, string>;
 
 function syncHeight(el: HTMLTextAreaElement) {
@@ -60,14 +53,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const inputId = id ?? autoId;
     const errorId = `${autoId}-err`;
     const isInvalid = invalid || Boolean(error);
-    const isControlled = value !== undefined;
 
     const innerRef = useRef<HTMLTextAreaElement>(null);
-
-    const [internalHasValue, setInternalHasValue] = useState(
-      () => Boolean(defaultValue && String(defaultValue).length > 0),
-    );
-    const hasValue = isControlled ? String(value).length > 0 : internalHasValue;
 
     const setRef = (node: HTMLTextAreaElement | null) => {
       (innerRef as React.MutableRefObject<HTMLTextAreaElement | null>).current = node;
@@ -81,21 +68,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
       if (autoResize) syncHeight(e.currentTarget);
-      if (!isControlled) setInternalHasValue(e.target.value.length > 0);
       onChange?.(e);
     };
-
-    const cornerClass = [
-      styles.corner,
-      cornerSizeClass[size],
-      disabled
-        ? styles.cornerDisabled
-        : hasValue
-          ? isInvalid ? styles.cornerErrorFilled : styles.cornerFilled
-          : isInvalid ? styles.cornerError : '',
-    ]
-      .filter(Boolean)
-      .join(' ');
 
     return (
       <div
@@ -142,7 +116,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             aria-describedby={error ? errorId : undefined}
             {...props}
           />
-          <span className={cornerClass} aria-hidden="true" />
         </div>
       </div>
     );

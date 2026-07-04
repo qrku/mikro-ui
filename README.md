@@ -14,7 +14,7 @@ Import the stylesheet once at the root of your app:
 
 ```tsx
 // layout.tsx or _app.tsx
-import 'mikro-ui/dist/index.css';
+import 'mikro-ui/styles';
 import 'mikro-ui/tokens';
 ```
 

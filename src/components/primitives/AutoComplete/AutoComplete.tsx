@@ -271,11 +271,7 @@ const AutoComplete = forwardRef<HTMLInputElement, AutoCompleteProps>(
                   >
                     <HighlightMatch text={optLabel} query={inputValue} />
                     <span
-                      className={[
-                        styles.optionIndicator,
-                        optionIndicatorSizeClass[size],
-                        i === activeIndex ? styles.optionIndicatorActive : '',
-                      ]
+                      className={[styles.optionIndicator, optionIndicatorSizeClass[size]]
                         .filter(Boolean)
                         .join(' ')}
                       aria-hidden="true"

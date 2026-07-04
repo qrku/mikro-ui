@@ -2,9 +2,7 @@
 
 import {
   forwardRef,
-  useState,
   useId,
-  type ChangeEvent,
   type InputHTMLAttributes,
 } from 'react';
 import styles from './Input.module.css';
@@ -16,19 +14,12 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   invalid?: boolean;
   error?: string;
   label?: string;
-  indicator?: boolean;
 }
 
 const inputSizeClass = {
   sm: styles.inputSm,
   md: styles.inputMd,
   lg: styles.inputLg,
-} as Record<InputSize, string>;
-
-const indicatorSizeClass = {
-  sm: styles.indicatorSm,
-  md: styles.indicatorMd,
-  lg: styles.indicatorLg,
 } as Record<InputSize, string>;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -38,7 +29,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       invalid = false,
       error,
       label,
-      indicator = true,
       className,
       id,
       value,
@@ -54,36 +44,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const errorId = `${autoId}-err`;
 
     const isInvalid = invalid || Boolean(error);
-    const isControlled = value !== undefined;
-
-    const [internalHasValue, setInternalHasValue] = useState(
-      () => Boolean(defaultValue && String(defaultValue).length > 0),
-    );
-
-    const hasValue = isControlled
-      ? String(value).length > 0
-      : internalHasValue;
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-      if (!isControlled) setInternalHasValue(e.target.value.length > 0);
-      onChange?.(e);
-    };
-
-    const indicatorClass = [
-      styles.indicator,
-      indicatorSizeClass[size],
-      disabled
-        ? styles.indicatorDisabled
-        : hasValue
-          ? isInvalid
-            ? styles.indicatorErrorFilled
-            : styles.indicatorFilled
-          : isInvalid
-            ? styles.indicatorError
-            : '',
-    ]
-      .filter(Boolean)
-      .join(' ');
 
     return (
       <div
@@ -118,13 +78,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={[styles.input, inputSizeClass[size]].join(' ')}
             value={value}
             defaultValue={defaultValue}
-            onChange={handleChange}
+            onChange={onChange}
             disabled={disabled}
             aria-invalid={isInvalid || undefined}
             aria-describedby={error ? errorId : undefined}
             {...props}
           />
-          {indicator && <span className={indicatorClass} aria-hidden="true" />}
         </div>
       </div>
     );

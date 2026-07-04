@@ -56,7 +56,8 @@
   height: var(--dot-size);
   border: 1px solid #111;
   background: #fff;
-  transform: translateY(-50%) translateX(var(--thumb-off)) rotate(45deg);
+  border-radius: var(--square-radius);
+  transform: translateY(-50%) translateX(var(--thumb-off));
   transition:
     transform 240ms cubic-bezier(0.16, 1, 0.3, 1),
     background-color 180ms;
@@ -64,7 +65,7 @@
 
 .input:checked ~ .track .thumb {
   background: #111;
-  transform: translateY(-50%) translateX(var(--thumb-on)) rotate(45deg);
+  transform: translateY(-50%) translateX(var(--thumb-on));
 }
 
 /* ── Label text ───────────────────────────────────────────────────────── */

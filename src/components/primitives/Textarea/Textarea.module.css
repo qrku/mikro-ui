@@ -37,7 +37,7 @@
 .textareaWrap {
   position: relative;
   background: #e8e8e8;
-  border-radius: 3px;
+  border-radius: var(--radius-md);
 }
 
 .invalid .textareaWrap {
@@ -71,41 +71,3 @@
 .textareaSm { min-height: 72px;  padding: 8px 10px;  font-size: 12px; }
 .textareaMd { min-height: 88px;  padding: 10px 12px; font-size: 13px; }
 .textareaLg { min-height: 108px; padding: 12px 16px; font-size: 14px; }
-
-/* ── Corner square (replaces native resize handle) ─────────────────────── */
-.corner {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  border: 1.5px solid #aaa;
-  background: transparent;
-  pointer-events: none;
-  transition: background-color 140ms, border-color 140ms;
-}
-
-.cornerSm { width: var(--dot-sm); height: var(--dot-sm); }
-.cornerMd { width: var(--dot-md); height: var(--dot-md); }
-.cornerLg { width: var(--dot-lg); height: var(--dot-lg); }
-
-/* has value → solid black */
-.cornerFilled {
-  background: #111;
-  border-color: transparent;
-}
-
-/* disabled → solid gray */
-.cornerDisabled {
-  background: #aaa;
-  border-color: transparent;
-}
-
-/* error, empty → outline red */
-.cornerError {
-  border-color: #e5484d;
-}
-
-/* error, has value → solid red */
-.cornerErrorFilled {
-  background: #e5484d;
-  border-color: transparent;
-}
