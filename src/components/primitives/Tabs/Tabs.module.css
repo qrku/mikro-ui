@@ -8,7 +8,7 @@
 .list {
   display: flex;
   align-items: flex-end;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid var(--color-divider, #e8e8e8);
 }
 
 /* ── Tab button ──────────────────────────────────────────────────────────── */
@@ -19,7 +19,7 @@
   padding: 0 16px 12px;
   background: transparent;
   border: none;
-  color: #999;
+  color: var(--color-muted, #999);
   font-family: inherit;
   font-weight: 400;
   cursor: pointer;
@@ -35,7 +35,7 @@
 }
 
 .tab:hover:not(:disabled) {
-  color: #555;
+  color: var(--color-muted-hover, #555);
 }
 
 .tab:focus-visible {
@@ -51,18 +51,18 @@
   flex-shrink: 0;
   width: 6px;
   height: 6px;
-  border: 1.5px solid #bbb;
+  border: 1.5px solid var(--color-border-subtler, #bbb);
   border-radius: var(--square-radius);
   transition: background-color 120ms, border-color 120ms;
 }
 
 /* Active state — filled square */
 .tabActive {
-  color: #111;
+  color: var(--color-ink, #111);
 }
 
 .tabActive::before {
-  background: #111;
+  background: var(--color-ink, #111);
   border-color: transparent;
 }
 
@@ -79,7 +79,7 @@
 /* ── Panel ───────────────────────────────────────────────────────────────── */
 .panel {
   padding-top: 20px;
-  color: #111;
+  color: var(--color-ink, #111);
   font-size: 13px;
   line-height: 1.6;
 }

@@ -19,7 +19,7 @@
   width: 100%;
   min-height: 44px;
   padding: 12px 12px 12px 14px;
-  background: #111;
+  background: var(--color-ink, #111);
   border-radius: var(--radius-md);
   pointer-events: auto;
   box-sizing: border-box;
@@ -53,20 +53,20 @@
   transition: background-color 140ms;
 }
 
-/* default — white outline square */
+/* default — outline square (inverse of the toast's ink background) */
 .indicatorDefault {
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border: 1.5px solid color-mix(in srgb, var(--color-ink-inverse, #fff) 50%, transparent);
   background: transparent;
 }
 
-/* success — white filled square */
+/* success — filled square */
 .indicatorSuccess {
-  background: #fff;
+  background: var(--color-ink-inverse, #fff);
 }
 
 /* error — red filled square */
 .indicatorError {
-  background: #e5484d;
+  background: var(--color-danger, #e5484d);
 }
 
 /* ── Message ──────────────────────────────────────────────────────────── */
@@ -74,7 +74,7 @@
   flex: 1;
   min-width: 0;
   font-size: 13px;
-  color: #fff;
+  color: var(--color-ink-inverse, #fff);
   line-height: 1.5;
   word-break: break-word;
 }
@@ -86,7 +86,7 @@
   height: 10px;
   padding: 0;
   border: none;
-  background: rgba(255, 255, 255, 0.35);
+  background: color-mix(in srgb, var(--color-ink-inverse, #fff) 35%, transparent);
   cursor: pointer;
   outline: none;
   border-radius: var(--square-radius);
@@ -94,10 +94,10 @@
 }
 
 .close:hover {
-  background: #fff;
+  background: var(--color-ink-inverse, #fff);
 }
 
 .close:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline: 2px solid color-mix(in srgb, var(--color-ink-inverse, #fff) 60%, transparent);
   outline-offset: 2px;
 }

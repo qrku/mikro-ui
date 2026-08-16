@@ -21,33 +21,33 @@
 
 /* Variants */
 .solid {
-  background-color: #111;
-  color: #fff;
+  background-color: var(--color-ink, #111);
+  color: var(--color-ink-inverse, #fff);
 }
 
 .solid:hover:not(:disabled) {
-  background-color: #333;
+  background-color: var(--color-muted-hover, #333);
 }
 
 .outline {
-  background-color: #fff;
-  color: #111;
-  border-color: #111;
+  background-color: var(--color-surface, #fff);
+  color: var(--color-ink, #111);
+  border-color: var(--color-border, #111);
 }
 
 .outline:hover:not(:disabled) {
-  background-color: #111;
-  color: #fff;
+  background-color: var(--color-ink, #111);
+  color: var(--color-ink-inverse, #fff);
 }
 
 .ghost {
   background-color: transparent;
-  color: #111;
+  color: var(--color-ink, #111);
 }
 
 .ghost:hover:not(:disabled) {
-  background-color: #111;
-  color: #fff;
+  background-color: var(--color-ink, #111);
+  color: var(--color-ink-inverse, #fff);
 }
 
 /* Sizes */

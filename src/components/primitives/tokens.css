@@ -2,12 +2,105 @@
   --dot-sm: 10px;
   --dot-md: 12px;
   --dot-lg: 14px;
-  --color-primary: #0070f3;
-  --color-primary-hover: #0060d3;
-  --color-primary-subtle: #e8f0fe;
 
   --square-radius: 3px;
   --radius-sm: 2px;
   --radius-md: 3px;
   --radius-lg: 4px;
+
+  --color-primary: #0070f3;
+  --color-primary-hover: #0060d3;
+  --color-primary-subtle: #e8f0fe;
+
+  /* ── Semantic colors — light (default) ──────────────────────────────── */
+  --color-page-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-sunken: #e8e8e8;
+  --color-surface-hover: #f0f0f0;
+
+  --color-ink: #111111;
+  --color-ink-inverse: #ffffff;
+
+  --color-border: #111111;
+  --color-border-subtle: #999999;
+  --color-border-subtler: #bbbbbb;
+  --color-divider: #e8e8e8;
+
+  --color-muted: #999999;
+  --color-muted-hover: #555555;
+  --color-placeholder: #b0b0b0;
+  --color-track: #cccccc;
+  --color-scrollbar: #dddddd;
+
+  --color-overlay: rgba(0, 0, 0, 0.45);
+  --shadow-dropdown: 0 4px 20px rgba(0, 0, 0, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06);
+
+  --color-danger: #e5484d;
+  --color-danger-subtle: rgba(229, 72, 77, 0.12);
+}
+
+/* ── Dark theme — follows system preference unless overridden ─────────── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-primary: #3b93ff;
+    --color-primary-hover: #63a9ff;
+    --color-primary-subtle: rgba(59, 147, 255, 0.16);
+
+    --color-page-bg: #0a0a0a;
+    --color-surface: #1c1c1c;
+    --color-surface-sunken: #2a2a2a;
+    --color-surface-hover: #292929;
+
+    --color-ink: #f2f2f2;
+    --color-ink-inverse: #111111;
+
+    --color-border: #f2f2f2;
+    --color-border-subtle: #7a7a7a;
+    --color-border-subtler: #555555;
+    --color-divider: #2a2a2a;
+
+    --color-muted: #8a8a8a;
+    --color-muted-hover: #b5b5b5;
+    --color-placeholder: #666666;
+    --color-track: #444444;
+    --color-scrollbar: #4a4a4a;
+
+    --color-overlay: rgba(0, 0, 0, 0.6);
+    --shadow-dropdown: 0 4px 20px rgba(0, 0, 0, 0.45), 0 1px 4px rgba(0, 0, 0, 0.3);
+
+    --color-danger: #ff6b70;
+    --color-danger-subtle: rgba(255, 107, 112, 0.16);
+  }
+}
+
+/* ── Dark theme — explicit opt-in via data-theme="dark" ────────────────── */
+:root[data-theme="dark"] {
+  --color-primary: #3b93ff;
+  --color-primary-hover: #63a9ff;
+  --color-primary-subtle: rgba(59, 147, 255, 0.16);
+
+  --color-page-bg: #0a0a0a;
+  --color-surface: #1c1c1c;
+  --color-surface-sunken: #2a2a2a;
+  --color-surface-hover: #292929;
+
+  --color-ink: #f2f2f2;
+  --color-ink-inverse: #111111;
+
+  --color-border: #f2f2f2;
+  --color-border-subtle: #7a7a7a;
+  --color-border-subtler: #555555;
+  --color-divider: #2a2a2a;
+
+  --color-muted: #8a8a8a;
+  --color-muted-hover: #b5b5b5;
+  --color-placeholder: #666666;
+  --color-track: #444444;
+  --color-scrollbar: #4a4a4a;
+
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --shadow-dropdown: 0 4px 20px rgba(0, 0, 0, 0.45), 0 1px 4px rgba(0, 0, 0, 0.3);
+
+  --color-danger: #ff6b70;
+  --color-danger-subtle: rgba(255, 107, 112, 0.16);
 }

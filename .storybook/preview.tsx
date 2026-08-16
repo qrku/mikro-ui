@@ -1,4 +1,6 @@
+import { useEffect } from 'react'
 import type { Preview } from '@storybook/nextjs-vite'
+import '../src/components/primitives/tokens.css'
 
 const preview: Preview = {
   parameters: {
@@ -16,6 +18,39 @@ const preview: Preview = {
       test: 'todo'
     }
   },
+
+  globalTypes: {
+    theme: {
+      description: 'Theme for components',
+      toolbar: {
+        title: 'Theme',
+        icon: 'circlehollow',
+        items: [
+          { value: 'light', title: 'Light' },
+          { value: 'dark', title: 'Dark' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
+
+  initialGlobals: {
+    theme: 'light',
+  },
+
+  decorators: [
+    (Story, context) => {
+      const theme = context.globals.theme ?? 'light';
+
+      useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        document.body.style.background = 'var(--color-page-bg)';
+        document.body.style.color = 'var(--color-ink)';
+      }, [theme]);
+
+      return <Story />;
+    },
+  ],
 };
 
 export default preview;

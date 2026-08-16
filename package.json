@@ -1,6 +1,6 @@
 {
   "name": "mikro-ui",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "Minimal UI component library built with React and CSS Modules.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

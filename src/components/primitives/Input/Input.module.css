@@ -21,14 +21,14 @@
 
 .labelText {
   font-size: 11px;
-  color: #999;
+  color: var(--color-muted, #999);
   line-height: 1;
   cursor: default;
 }
 
 .errorText {
   font-size: 11px;
-  color: #e5484d;
+  color: var(--color-danger, #e5484d);
   font-style: italic;
   line-height: 1;
 }
@@ -37,12 +37,12 @@
 .inputWrap {
   display: flex;
   align-items: center;
-  background: #e8e8e8;
+  background: var(--color-surface-sunken, #e8e8e8);
   border-radius: var(--radius-md);
 }
 
 .invalid .inputWrap {
-  background: rgba(229, 72, 77, 0.12);
+  background: var(--color-danger-subtle, rgba(229, 72, 77, 0.12));
 }
 
 /* ── Input ─────────────────────────────────────────────────────────────── */
@@ -52,14 +52,14 @@
   background: transparent;
   border: none;
   outline: none;
-  color: #111;
+  color: var(--color-ink, #111);
   font-family: inherit;
   font-weight: 400;
   line-height: 1;
 }
 
 .input::placeholder {
-  color: #b0b0b0;
+  color: var(--color-placeholder, #b0b0b0);
 }
 
 /* sizes */

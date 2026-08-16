@@ -24,7 +24,7 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #111;
+  color: var(--color-ink, #111);
   opacity: 0.3;
 }
 

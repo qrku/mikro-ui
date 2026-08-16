@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ThemeToggle } from './ThemeToggle';
 import styles from './AppNav.module.css';
 
 export function AppNav() {
@@ -18,6 +19,7 @@ export function AppNav() {
         <Link href="/compositions" className={[styles.tab, isCompositions ? styles.tabActive : ''].filter(Boolean).join(' ')}>
           compositions
         </Link>
+        <ThemeToggle />
       </nav>
     </header>
   );

@@ -21,7 +21,7 @@ export function ModalDemo() {
         size={size ?? 'md'}
       >
         <p>This is the modal body. You can put any content here.</p>
-        <p style={{ marginTop: 8, color: '#999', fontSize: 12 }}>
+        <p style={{ marginTop: 8, color: 'var(--color-muted, #999)', fontSize: 12 }}>
           Press Escape or click outside to close.
         </p>
       </Modal>

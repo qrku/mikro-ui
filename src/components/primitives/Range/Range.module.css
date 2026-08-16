@@ -14,7 +14,7 @@
 /* ── Label ──────────────────────────────────────────────────────────────── */
 .label {
   font-size: 11px;
-  color: #999;
+  color: var(--color-muted, #999);
   line-height: 1;
 }
 
@@ -37,8 +37,8 @@
   height: 1px;
   background: linear-gradient(
     to right,
-    #111 var(--pct, 0%),
-    #ccc var(--pct, 0%)
+    var(--color-ink, #111) var(--pct, 0%),
+    var(--color-track, #ccc) var(--pct, 0%)
   );
 }
 
@@ -48,15 +48,15 @@
   box-sizing: border-box;
   width: var(--dot-size);
   height: var(--dot-size);
-  background: #fff;
-  border: 1px solid #111;
+  background: var(--color-surface, #fff);
+  border: 1px solid var(--color-border, #111);
   border-radius: var(--square-radius);
   margin-top: calc((1px - var(--dot-size)) / 2);
   transition: background-color 120ms;
 }
 
 .input:hover::-webkit-slider-thumb {
-  background: #111;
+  background: var(--color-ink, #111);
 }
 
 .input:focus-visible::-webkit-slider-thumb {
@@ -67,13 +67,13 @@
 /* ── Firefox track ──────────────────────────────────────────────────────── */
 .input::-moz-range-track {
   height: 1px;
-  background: #ccc;
+  background: var(--color-track, #ccc);
   border: none;
 }
 
 .input::-moz-range-progress {
   height: 1px;
-  background: #111;
+  background: var(--color-ink, #111);
 }
 
 /* ── Firefox thumb — square ─────────────────────────────────────────────── */
@@ -81,14 +81,14 @@
   box-sizing: border-box;
   width: var(--dot-size);
   height: var(--dot-size);
-  background: #fff;
-  border: 1px solid #111;
+  background: var(--color-surface, #fff);
+  border: 1px solid var(--color-border, #111);
   border-radius: var(--square-radius);
   transition: background-color 120ms;
 }
 
 .input:hover::-moz-range-thumb {
-  background: #111;
+  background: var(--color-ink, #111);
 }
 
 .input:focus-visible::-moz-range-thumb {

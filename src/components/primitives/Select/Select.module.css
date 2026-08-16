@@ -10,7 +10,7 @@
   display: block;
   margin-bottom: 5px;
   font-size: 11px;
-  color: #999;
+  color: var(--color-muted, #999);
   line-height: 1;
   cursor: default;
 }
@@ -21,12 +21,12 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background: #e8e8e8;
+  background: var(--color-surface-sunken, #e8e8e8);
   border: none;
   border-radius: var(--radius-md);
   font-family: inherit;
   font-weight: 400;
-  color: #111;
+  color: var(--color-ink, #111);
   line-height: 1;
   cursor: pointer;
   text-align: left;
@@ -50,7 +50,7 @@
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #b0b0b0;
+  color: var(--color-placeholder, #b0b0b0);
 }
 
 .value {
@@ -58,13 +58,13 @@
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #111;
+  color: var(--color-ink, #111);
 }
 
 /* ── Trigger indicator ────────────────────────────────────────────────── */
 .indicator {
   flex-shrink: 0;
-  background: #111;
+  background: var(--color-ink, #111);
   border-radius: var(--square-radius);
   transition: background-color 140ms;
 }
@@ -72,7 +72,7 @@
 /* no value → outline square */
 .indicatorOutline {
   background: transparent;
-  border: 1.5px solid #999;
+  border: 1.5px solid var(--color-border-subtle, #999);
 }
 
 /* sizes */
@@ -87,11 +87,9 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: #fff;
+  background: var(--color-surface, #fff);
   border-radius: var(--radius-lg);
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.10),
-    0 1px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-dropdown, 0 4px 20px rgba(0, 0, 0, 0.10), 0 1px 4px rgba(0, 0, 0, 0.06));
   overflow: hidden;
 
   opacity: 0;
@@ -125,12 +123,12 @@
   overflow-y: auto;
   outline: none;
   scrollbar-width: thin;
-  scrollbar-color: #ddd transparent;
+  scrollbar-color: var(--color-scrollbar, #ddd) transparent;
 }
 
 .list::-webkit-scrollbar { width: 4px; }
 .list::-webkit-scrollbar-track { background: transparent; }
-.list::-webkit-scrollbar-thumb { background: #ddd; border-radius: var(--radius-lg); }
+.list::-webkit-scrollbar-thumb { background: var(--color-scrollbar, #ddd); border-radius: var(--radius-lg); }
 
 /* ── Option item ──────────────────────────────────────────────────────── */
 .option {
@@ -140,13 +138,13 @@
   border-radius: var(--radius-sm);
   cursor: pointer;
   user-select: none;
-  color: #111;
+  color: var(--color-ink, #111);
   white-space: nowrap;
   transition: background-color 80ms;
 }
 
 .optionActive {
-  background: #f0f0f0;
+  background: var(--color-surface-hover, #f0f0f0);
 }
 
 .optionDisabled {
@@ -158,7 +156,7 @@
 /* ── Option indicator ─────────────────────────────────────────────────── */
 .optionIndicator {
   flex-shrink: 0;
-  background: #111;
+  background: var(--color-ink, #111);
   border-radius: var(--square-radius);
 }
 
